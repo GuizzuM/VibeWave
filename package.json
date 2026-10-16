@@ -1,0 +1,47 @@
+{
+  "name": "bfmusic",
+  "version": "1.0.0",
+  "description": "BF Music - Player de música para Windows feito com Electron + React",
+  "main": "main.js",
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "wait-on tcp:5173 && cross-env NODE_ENV=development electron .",
+    "dev": "concurrently -k -n VITE,ELECTRON -c cyan,magenta \"npm run dev:vite\" \"npm run dev:electron\"",
+    "build": "vite build",
+    "start": "cross-env NODE_ENV=production electron .",
+    "dist": "npm run build && electron-builder"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.3",
+    "cross-env": "^10.1.0",
+    "electron": "^43.0.0",
+    "electron-builder": "^26.15.3",
+    "vite": "^8.1.3",
+    "wait-on": "^9.0.10"
+  },
+  "dependencies": {
+    "music-metadata": "^11.13.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "build": {
+    "appId": "com.bf.music",
+    "productName": "BF Music",
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/icons/icon.png"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js"
+    ],
+    "directories": {
+      "output": "release"
+    }
+  }
+}
